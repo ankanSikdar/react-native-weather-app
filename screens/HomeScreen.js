@@ -6,8 +6,7 @@ const HomeScreen = ({ navigation }) => {
   const [city, setCity] = useState("");
 
   const handleSubmit = () => {
-    console.log(city);
-    navigation.navigate("Details");
+    navigation.navigate("Details", { cityName: city });
   };
 
   return (

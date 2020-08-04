@@ -1,10 +1,14 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
-const DetailsScreen = (props) => {
+const DetailsScreen = ({ route, navigation }) => {
+  const { cityName } = route.params;
+
+  navigation.setOptions({ title: cityName });
+
   return (
     <View style={styles.container}>
-      <Text>Details Screen</Text>
+      <Text>{cityName}</Text>
     </View>
   );
 };
