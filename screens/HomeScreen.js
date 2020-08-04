@@ -1,12 +1,24 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, Button, TextInput } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Button,
+  TextInput,
+  ActivityIndicator,
+} from "react-native";
 import AppTextInput from "../components/AppTextInput";
+import weatherApi from "../api/weatherApi";
 
 const HomeScreen = ({ navigation }) => {
   const [city, setCity] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = () => {
-    navigation.navigate("Details", { cityName: city });
+  const handleSubmit = async () => {
+    setLoading(true);
+    const weather = await weatherApi(city);
+    setLoading(false);
+    navigation.navigate("Details", { weather: weather });
   };
 
   return (
@@ -14,6 +26,7 @@ const HomeScreen = ({ navigation }) => {
       <Text>Enter City Name</Text>
       <AppTextInput onChangeText={(name) => setCity(name)} />
       <Button title="Search" onPress={handleSubmit} />
+      {loading && <ActivityIndicator size="large" />}
     </View>
   );
 };
