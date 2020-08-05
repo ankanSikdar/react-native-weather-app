@@ -5,6 +5,7 @@ import {
   Text,
   ActivityIndicator,
   ImageBackground,
+  Alert,
 } from "react-native";
 import Constants from "expo-constants";
 
@@ -22,6 +23,17 @@ const HomeScreen = ({ navigation }) => {
     setLoading(true);
     const weather = await weatherApi(city);
     setLoading(false);
+    if (weather.cod == 404) {
+      Alert.alert(
+        weather.message.toUpperCase(),
+        "Enter a Valid City Name",
+        [{ text: "OK", onPress: () => console.log(weather.message) }],
+        { cancelable: true }
+      );
+      return;
+    }
+    console.log(weather);
+    setCity("");
     navigation.navigate("Details", { weather: weather });
   };
 
