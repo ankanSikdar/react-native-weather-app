@@ -7,9 +7,13 @@ import {
   Text,
 } from "react-native";
 
-const AppButton = ({ onPress, title }) => {
+const AppButton = ({ onPress, title, ...otherProps }) => {
   return (
-    <TouchableHighlight onPress={onPress} style={styles.container}>
+    <TouchableHighlight
+      onPress={onPress}
+      style={styles.container}
+      {...otherProps}
+    >
       <Text style={styles.text}>{title}</Text>
     </TouchableHighlight>
   );

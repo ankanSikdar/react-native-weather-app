@@ -23,17 +23,15 @@ const HomeScreen = ({ navigation }) => {
     setLoading(true);
     const weather = await weatherApi(city);
     setLoading(false);
-    if (weather.cod == 404) {
+    if (weather.cod != 200) {
       Alert.alert(
+        `ERROR ${weather.cod}`,
         weather.message.toUpperCase(),
-        "Enter a Valid City Name",
         [{ text: "OK", onPress: () => console.log(weather.message) }],
         { cancelable: true }
       );
       return;
     }
-    console.log(weather);
-    setCity("");
     navigation.navigate("Details", { weather: weather });
   };
 
