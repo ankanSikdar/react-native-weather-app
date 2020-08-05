@@ -7,6 +7,7 @@ import {
   ImageBackground,
   ScrollView,
 } from "react-native";
+import Constants from "expo-constants";
 
 const DetailsScreen = ({ route, navigation }) => {
   const { weather } = route.params;
@@ -31,17 +32,20 @@ const DetailsScreen = ({ route, navigation }) => {
       backgroundImage = require("../assets/backgrounds/thunderstorm.jpg");
     }
   };
-
   setBackground(weatherId);
-
-  console.log(weatherId, backgroundImage);
 
   navigation.setOptions({ headerShown: false });
 
   return (
     <ScrollView>
       <View style={styles.container}>
-        <ImageBackground source={backgroundImage} style={styles.background}>
+        <ImageBackground
+          source={backgroundImage}
+          style={{
+            ...styles.background,
+            paddingTop: Constants.statusBarHeight + 20,
+          }}
+        >
           <View style={styles.mainCard}>
             <View style={styles.mainCardContainer}>
               <Text style={styles.cityName} numberOfLines={1}>
@@ -138,10 +142,8 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    // justifyContent: "center",
     alignItems: "center",
     opacity: 0.85,
-    paddingTop: 50,
     resizeMode: "cover",
   },
   icon: {
