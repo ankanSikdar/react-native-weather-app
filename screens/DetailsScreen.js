@@ -1,5 +1,12 @@
 import React from "react";
-import { View, StyleSheet, Text, Image, ImageBackground } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  ImageBackground,
+  ScrollView,
+} from "react-native";
 
 const DetailsScreen = ({ route, navigation }) => {
   const { weather } = route.params;
@@ -9,56 +16,93 @@ const DetailsScreen = ({ route, navigation }) => {
   navigation.setOptions({ headerShown: false });
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require("../assets/backgrounds/clear.jpg")}
-        style={styles.background}
-      >
-        <View style={styles.mainCard}>
-          <View style={styles.mainCardContainer}>
-            <Text style={styles.cityName} numberOfLines={1}>
-              {weather.name}
-            </Text>
-            <Text style={styles.weatherTitle}>{weather.weather[0].main} </Text>
-            <Image
-              source={{
-                uri: `http://openweathermap.org/img/wn/${icon}@2x.png`,
-              }}
-              style={styles.icon}
-            />
-            <Text style={styles.mainTemperature}>
-              {(weather.main.temp - 273.15).toPrecision(4)}&deg;C
-            </Text>
+    <>
+      <View style={styles.container}>
+        <ImageBackground
+          source={require("../assets/backgrounds/clear.jpg")}
+          style={styles.background}
+        >
+          <View style={styles.mainCard}>
+            <View style={styles.mainCardContainer}>
+              <Text style={styles.cityName} numberOfLines={1}>
+                {weather.name}
+              </Text>
+              <Text style={styles.weatherTitle}>
+                {weather.weather[0].main}{" "}
+              </Text>
+              <Image
+                source={{
+                  uri: `http://openweathermap.org/img/wn/${icon}@2x.png`,
+                }}
+                style={styles.icon}
+              />
+              <Text style={styles.mainTemperature}>
+                {(weather.main.temp - 273.15).toPrecision(2)}&deg;C
+              </Text>
+            </View>
           </View>
-        </View>
 
-        <View style={styles.detailsContainer}>
-          <View style={{ marginBottom: 10 }}>
-            <Text style={styles.detailsText}>Lat: {weather.coord.lat}</Text>
-            <Text style={styles.detailsText}>Lon: {weather.coord.lon}</Text>
+          <View style={styles.detailsContainer}>
+            <View style={styles.detailsRow}>
+              <View style={styles.detailsCard}>
+                <Text style={styles.detailsText}>
+                  Latitude: {weather.coord.lat}
+                </Text>
+                <Text style={styles.detailsText}>
+                  Longitude: {weather.coord.lon}
+                </Text>
+              </View>
+              <View style={styles.detailsCard}>
+                <Text style={styles.detailsText}>
+                  Cloudiness: {weather.clouds.all}&#37;
+                </Text>
+              </View>
+            </View>
+            <View style={styles.detailsRow}>
+              <View style={styles.detailsCard}>
+                <Text style={styles.detailsText}>
+                  Temp: {(weather.main.temp - 273.15).toPrecision(4)}
+                  &deg;C
+                </Text>
+                <Text style={styles.detailsText}>
+                  Feels Like:{" "}
+                  {(weather.main.feels_like - 273.15).toPrecision(4)}
+                  &deg;C
+                </Text>
+              </View>
+              <View style={styles.detailsCard}>
+                <Text style={styles.detailsText}>
+                  Humidity: {weather.main.humidity}&#37;
+                </Text>
+                <Text style={styles.detailsText}>
+                  Pressure: {weather.main.pressure}hPa
+                </Text>
+              </View>
+            </View>
+            <View style={styles.detailsRow}>
+              <View style={styles.detailsCard}>
+                <Text style={styles.detailsText}>
+                  Max Temp: {(weather.main.temp_max - 273.15).toPrecision(4)}
+                  &deg;C
+                </Text>
+                <Text style={styles.detailsText}>
+                  Min Temp: {(weather.main.temp_min - 273.15).toPrecision(4)}
+                  &deg;C
+                </Text>
+              </View>
+              <View style={styles.detailsCard}>
+                <Text style={styles.detailsText}>
+                  Wind Deg: {weather.wind.deg}&deg;
+                </Text>
+                <Text style={styles.detailsText}>
+                  Speed: {weather.wind.speed} mi/s
+                </Text>
+              </View>
+            </View>
           </View>
-          <View style={{ marginBottom: 10 }}>
-            <Text style={styles.detailsText}>
-              Cloud: {weather.clouds.all}&#37;
-            </Text>
-          </View>
-          <View style={{ marginBottom: 10 }}>
-            <Text style={styles.detailsText}>
-              Temp: {(weather.main.temp - 273.15).toPrecision(4)}&deg;C
-            </Text>
-            <Text style={styles.detailsText}>
-              Feels: {(weather.main.feels_like - 273.15).toPrecision(4)}
-              &deg;C
-            </Text>
-          </View>
-          <View style={{ marginBottom: 10 }}>
-            <Text style={styles.detailsText}>
-              Humidity: {weather.main.humidity}&#37;
-            </Text>
-          </View>
-        </View>
-      </ImageBackground>
-    </View>
+        </ImageBackground>
+      </View>
+    </>
   );
 };
 
@@ -72,7 +116,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     opacity: 0.85,
     paddingTop: 50,
-    resizeMode: "contain",
+    resizeMode: "cover",
   },
   icon: {
     height: 100,
@@ -114,17 +158,26 @@ const styles = StyleSheet.create({
     color: "white",
   },
   detailsContainer: {
+    width: "100%",
+    height: "100%",
+    paddingHorizontal: 20,
+  },
+  detailsRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  detailsCard: {
     flexDirection: "column",
     backgroundColor: "rgba(0, 0, 0, 0.7)",
     borderRadius: 10,
-    width: "90%",
-    justifyContent: "space-between",
-    alignItems: "center",
+    width: 180,
+    justifyContent: "center",
+    alignItems: "flex-start",
     padding: 10,
     marginTop: 30,
   },
   detailsText: {
-    fontSize: 20,
+    fontSize: 17,
     color: "white",
   },
 });

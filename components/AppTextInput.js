@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   input: {
     textAlign: "center",
     height: 70,
-    width: 150,
+    width: 300,
     borderBottomColor: "grey",
     borderBottomWidth: 5,
     fontSize: 30,
