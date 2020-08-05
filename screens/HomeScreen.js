@@ -20,7 +20,9 @@ const HomeScreen = ({ navigation }) => {
       <Text style={styles.title}>Enter City Name</Text>
       <AppTextInput onChangeText={(name) => setCity(name)} />
       <AppButton title="Search" onPress={handleSubmit} />
-      {loading && <ActivityIndicator size="large" />}
+      {loading && (
+        <ActivityIndicator size="large" color="black" style={styles.loading} />
+      )}
     </View>
   );
 };
@@ -35,6 +37,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 45,
     fontWeight: "bold",
+  },
+  loading: {
+    marginTop: 20,
   },
 });
 
