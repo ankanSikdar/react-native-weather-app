@@ -16,7 +16,7 @@ const DetailsScreen = ({ route, navigation }) => {
   navigation.setOptions({ headerShown: false });
 
   return (
-    <>
+    <ScrollView>
       <View style={styles.container}>
         <ImageBackground
           source={require("../assets/backgrounds/clear.jpg")}
@@ -45,6 +45,7 @@ const DetailsScreen = ({ route, navigation }) => {
           <View style={styles.detailsContainer}>
             <View style={styles.detailsRow}>
               <View style={styles.detailsCard}>
+                <Text style={styles.detailsTitle}>Coordinates</Text>
                 <Text style={styles.detailsText}>
                   Latitude: {weather.coord.lat}
                 </Text>
@@ -53,6 +54,7 @@ const DetailsScreen = ({ route, navigation }) => {
                 </Text>
               </View>
               <View style={styles.detailsCard}>
+                <Text style={styles.detailsTitle}>Clouds</Text>
                 <Text style={styles.detailsText}>
                   Cloudiness: {weather.clouds.all}&#37;
                 </Text>
@@ -60,8 +62,9 @@ const DetailsScreen = ({ route, navigation }) => {
             </View>
             <View style={styles.detailsRow}>
               <View style={styles.detailsCard}>
+                <Text style={styles.detailsTitle}>Temperature</Text>
                 <Text style={styles.detailsText}>
-                  Temp: {(weather.main.temp - 273.15).toPrecision(4)}
+                  Actual: {(weather.main.temp - 273.15).toPrecision(4)}
                   &deg;C
                 </Text>
                 <Text style={styles.detailsText}>
@@ -71,6 +74,7 @@ const DetailsScreen = ({ route, navigation }) => {
                 </Text>
               </View>
               <View style={styles.detailsCard}>
+                <Text style={styles.detailsTitle}>Air</Text>
                 <Text style={styles.detailsText}>
                   Humidity: {weather.main.humidity}&#37;
                 </Text>
@@ -81,6 +85,7 @@ const DetailsScreen = ({ route, navigation }) => {
             </View>
             <View style={styles.detailsRow}>
               <View style={styles.detailsCard}>
+                <Text style={styles.detailsTitle}>Max Min</Text>
                 <Text style={styles.detailsText}>
                   Max Temp: {(weather.main.temp_max - 273.15).toPrecision(4)}
                   &deg;C
@@ -91,6 +96,7 @@ const DetailsScreen = ({ route, navigation }) => {
                 </Text>
               </View>
               <View style={styles.detailsCard}>
+                <Text style={styles.detailsTitle}>Wind</Text>
                 <Text style={styles.detailsText}>
                   Wind Deg: {weather.wind.deg}&deg;
                 </Text>
@@ -102,7 +108,7 @@ const DetailsScreen = ({ route, navigation }) => {
           </View>
         </ImageBackground>
       </View>
-    </>
+    </ScrollView>
   );
 };
 
@@ -132,6 +138,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     padding: 10,
+    marginBottom: 15,
   },
   mainCardContainer: {
     flexDirection: "column",
@@ -171,10 +178,17 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.7)",
     borderRadius: 10,
     width: 180,
-    justifyContent: "center",
     alignItems: "flex-start",
     padding: 10,
-    marginTop: 30,
+    marginVertical: 15,
+  },
+  detailsTitle: {
+    borderBottomColor: "white",
+    borderBottomWidth: 3,
+    width: "100%",
+    marginVertical: 5,
+    color: "white",
+    fontSize: 20,
   },
   detailsText: {
     fontSize: 17,
