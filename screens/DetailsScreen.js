@@ -20,55 +20,41 @@ const DetailsScreen = ({ route, navigation }) => {
               {weather.name}
             </Text>
             <Text style={styles.weatherTitle}>{weather.weather[0].main} </Text>
+            <Image
+              source={{
+                uri: `http://openweathermap.org/img/wn/${icon}@2x.png`,
+              }}
+              style={styles.icon}
+            />
             <Text style={styles.mainTemperature}>
               {(weather.main.temp - 273.15).toPrecision(4)}&deg;C
             </Text>
           </View>
-          <Image
-            source={{
-              uri: `http://openweathermap.org/img/wn/${icon}@2x.png`,
-            }}
-            style={styles.icon}
-          />
         </View>
 
         <View style={styles.detailsContainer}>
-          <View
-            style={{
-              flexDirection: "column",
-              margin: 10,
-            }}
-          >
-            <View style={{ marginBottom: 10 }}>
-              <Text style={styles.detailsText}>Lat: {weather.coord.lat}</Text>
-              <Text style={styles.detailsText}>Lon: {weather.coord.lon}</Text>
-            </View>
-            <View style={{ marginBottom: 10 }}>
-              <Text style={styles.detailsText}>
-                Cloud: {weather.clouds.all}&#37;{" "}
-              </Text>
-            </View>
+          <View style={{ marginBottom: 10 }}>
+            <Text style={styles.detailsText}>Lat: {weather.coord.lat}</Text>
+            <Text style={styles.detailsText}>Lon: {weather.coord.lon}</Text>
           </View>
-          <View
-            style={{
-              flexDirection: "column",
-              margin: 10,
-            }}
-          >
-            <View style={{ marginBottom: 10 }}>
-              <Text style={styles.detailsText}>
-                Temp: {(weather.main.temp - 273.15).toPrecision(4)}&deg;C
-              </Text>
-              <Text style={styles.detailsText}>
-                Feels: {(weather.main.feels_like - 273.15).toPrecision(4)}
-                &deg;C
-              </Text>
-            </View>
-            <View style={{ marginBottom: 10 }}>
-              <Text style={styles.detailsText}>
-                Humidity: {weather.main.humidity}&#37;{" "}
-              </Text>
-            </View>
+          <View style={{ marginBottom: 10 }}>
+            <Text style={styles.detailsText}>
+              Cloud: {weather.clouds.all}&#37;
+            </Text>
+          </View>
+          <View style={{ marginBottom: 10 }}>
+            <Text style={styles.detailsText}>
+              Temp: {(weather.main.temp - 273.15).toPrecision(4)}&deg;C
+            </Text>
+            <Text style={styles.detailsText}>
+              Feels: {(weather.main.feels_like - 273.15).toPrecision(4)}
+              &deg;C
+            </Text>
+          </View>
+          <View style={{ marginBottom: 10 }}>
+            <Text style={styles.detailsText}>
+              Humidity: {weather.main.humidity}&#37;
+            </Text>
           </View>
         </View>
       </ImageBackground>
@@ -91,10 +77,12 @@ const styles = StyleSheet.create({
   icon: {
     height: 100,
     width: 100,
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
+    borderRadius: 50,
   },
   mainCard: {
-    flexDirection: "row",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    flexDirection: "column",
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
     borderRadius: 10,
     width: "90%",
     justifyContent: "space-between",
@@ -103,28 +91,31 @@ const styles = StyleSheet.create({
   },
   mainCardContainer: {
     flexDirection: "column",
-    justifyContent: "space-evenly",
+    justifyContent: "space-around",
+    alignItems: "center",
   },
   cityName: {
-    fontSize: 30,
+    fontSize: 40,
     overflow: "hidden",
-    marginTop: 5,
-    maxWidth: 250,
+    marginTop: 20,
     fontWeight: "bold",
+    color: "white",
   },
   weatherTitle: {
-    fontSize: 25,
-    marginTop: 5,
+    fontSize: 35,
+    marginVertical: 15,
     fontWeight: "bold",
+    color: "white",
   },
   mainTemperature: {
-    fontSize: 20,
-    marginTop: 5,
+    fontSize: 30,
+    marginVertical: 20,
     fontWeight: "bold",
+    color: "white",
   },
   detailsContainer: {
-    flexDirection: "row",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    flexDirection: "column",
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
     borderRadius: 10,
     width: "90%",
     justifyContent: "space-between",
@@ -134,6 +125,7 @@ const styles = StyleSheet.create({
   },
   detailsText: {
     fontSize: 20,
+    color: "white",
   },
 });
 
