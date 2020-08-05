@@ -11,15 +11,14 @@ const AppTextInput = ({ ...otherProps }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 20,
+    marginVertical: 40,
   },
   input: {
     textAlign: "center",
     height: 70,
     width: 150,
-    borderColor: "white",
-    borderWidth: 1,
-    borderRadius: 10,
+    borderBottomColor: "grey",
+    borderBottomWidth: 5,
     fontSize: 30,
     fontWeight: "bold",
   },

@@ -1,14 +1,8 @@
 import React, { useState } from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  Button,
-  TextInput,
-  ActivityIndicator,
-} from "react-native";
+import { View, StyleSheet, Text, ActivityIndicator } from "react-native";
 import AppTextInput from "../components/AppTextInput";
 import weatherApi from "../api/weatherApi";
+import AppButton from "../components/AppButton";
 
 const HomeScreen = ({ navigation }) => {
   const [city, setCity] = useState("");
@@ -25,7 +19,7 @@ const HomeScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Text style={styles.title}>Enter City Name</Text>
       <AppTextInput onChangeText={(name) => setCity(name)} />
-      <Button title="Search" onPress={handleSubmit} />
+      <AppButton title="Search" onPress={handleSubmit} />
       {loading && <ActivityIndicator size="large" />}
     </View>
   );
