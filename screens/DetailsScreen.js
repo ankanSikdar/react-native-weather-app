@@ -11,17 +11,37 @@ import {
 const DetailsScreen = ({ route, navigation }) => {
   const { weather } = route.params;
   const icon = weather.weather[0].icon;
-  console.log(weather);
+  const weatherId = weather.weather[0].id;
+  let backgroundImage = "";
+
+  const setBackground = (id) => {
+    if (weatherId >= 800) {
+      backgroundImage = require("../assets/backgrounds/clouds.jpg");
+    } else if (weatherId == 800) {
+      backgroundImage = require("../assets/backgrounds/clear.jpg");
+    } else if (weatherId >= 700) {
+      backgroundImage = require("../assets/backgrounds/atmosphere.jpg");
+    } else if (weatherId >= 600) {
+      backgroundImage = require("../assets/backgrounds/snowfall.jpg");
+    } else if (weatherId >= 500) {
+      backgroundImage = require("../assets/backgrounds/rainfall.jpg");
+    } else if (weatherId >= 300) {
+      backgroundImage = require("../assets/backgrounds/drizzle.jpg");
+    } else {
+      backgroundImage = require("../assets/backgrounds/thunderstorm.jpg");
+    }
+  };
+
+  setBackground(weatherId);
+
+  console.log(weatherId, backgroundImage);
 
   navigation.setOptions({ headerShown: false });
 
   return (
     <ScrollView>
       <View style={styles.container}>
-        <ImageBackground
-          source={require("../assets/backgrounds/clear.jpg")}
-          style={styles.background}
-        >
+        <ImageBackground source={backgroundImage} style={styles.background}>
           <View style={styles.mainCard}>
             <View style={styles.mainCardContainer}>
               <Text style={styles.cityName} numberOfLines={1}>
@@ -101,7 +121,7 @@ const DetailsScreen = ({ route, navigation }) => {
                   Wind Deg: {weather.wind.deg}&deg;
                 </Text>
                 <Text style={styles.detailsText}>
-                  Speed: {weather.wind.speed} mi/s
+                  Speed: {(weather.wind.speed * 3.6).toPrecision(3)} km/hr
                 </Text>
               </View>
             </View>
