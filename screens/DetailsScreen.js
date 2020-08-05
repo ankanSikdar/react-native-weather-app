@@ -39,13 +39,7 @@ const DetailsScreen = ({ route, navigation }) => {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <ImageBackground
-          source={backgroundImage}
-          style={{
-            ...styles.background,
-            paddingTop: Constants.statusBarHeight + 20,
-          }}
-        >
+        <ImageBackground source={backgroundImage} style={styles.background}>
           <View style={styles.mainCard}>
             <View style={styles.mainCardContainer}>
               <Text style={styles.cityName} numberOfLines={1}>
@@ -145,6 +139,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     opacity: 0.85,
     resizeMode: "cover",
+    paddingTop: Constants.statusBarHeight + 20,
   },
   icon: {
     height: 100,
