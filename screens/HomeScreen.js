@@ -23,7 +23,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text>Enter City Name</Text>
+      <Text style={styles.title}>Enter City Name</Text>
       <AppTextInput onChangeText={(name) => setCity(name)} />
       <Button title="Search" onPress={handleSubmit} />
       {loading && <ActivityIndicator size="large" />}
@@ -36,6 +36,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white",
+  },
+  title: {
+    fontSize: 45,
+    fontWeight: "bold",
   },
 });
 
