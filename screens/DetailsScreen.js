@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   icon: {
     height: 100,
     width: 100,
-    backgroundColor: "rgba(255, 255, 255, 0.5)",
+    backgroundColor: "rgb(46, 147, 255)",
     borderRadius: 50,
   },
   mainCard: {
