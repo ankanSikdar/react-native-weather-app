@@ -16,7 +16,7 @@ const DetailsScreen = ({ route, navigation }) => {
   let backgroundImage = "";
 
   const setBackground = (id) => {
-    if (weatherId >= 800) {
+    if (weatherId > 800) {
       backgroundImage = require("../assets/backgrounds/clouds.jpg");
     } else if (weatherId == 800) {
       backgroundImage = require("../assets/backgrounds/clear.jpg");
